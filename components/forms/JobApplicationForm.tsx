@@ -9,8 +9,8 @@ import { Loader2, CheckCircle2, AlertCircle, Upload, FileText, X } from 'lucide-
 
 const applicationSchema = z.object({
   name: z.string().min(2, 'Il nome deve essere di almeno 2 caratteri'),
-  email: z.string().email('Email non valida'),
-  phone: z.string().min(10, 'Numero di telefono non valido'),
+  email: z.string().min(5, 'Email non valida').includes('@', { message: 'Email non valida' }),
+  phone: z.string().min(8, 'Numero di telefono non valido'),
   position: z.string().min(3, 'Specifica la posizione di interesse'),
   experience: z.string().min(10, 'Descrivi la tua esperienza'),
   message: z.string().optional(),
