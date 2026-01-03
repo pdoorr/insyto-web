@@ -48,8 +48,10 @@ export async function POST(request: NextRequest) {
 
         console.log('CV uploaded successfully:', asset._id)
         cvAsset = {
-          _ref: asset._id,
-          _type: 'reference',
+          asset: {
+            _ref: asset._id,
+            _type: 'reference',
+          },
         }
       } catch (error) {
         cvUploadError = error
