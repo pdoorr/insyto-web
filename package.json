@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@sanity/client": "^6.29.1",
     "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^3.20.1",
     "@tailwindcss/typography": "^0.5.19",
     "clsx": "^2.1.0",
     "dotenv": "^17.2.3",
@@ -27,6 +28,7 @@
     "react-dom": "^18.3.0",
     "react-hook-form": "^7.50.0",
     "resend": "^3.2.0",
+    "sanity": "^3.20.1",
     "tailwind-merge": "^2.2.1",
     "zod": "^3.22.4"
   },
