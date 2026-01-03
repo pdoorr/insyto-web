@@ -121,7 +121,8 @@ export default defineType({
     },
     prepare(selection) {
       const { title, subtitle, status, appliedAt, cv } = selection
-      const hasCv = cv?.url
+      // Check for both old format (_ref) and new format (url)
+      const hasCv = cv?._ref || cv?.url
 
       return {
         title: `${title} - ${subtitle}`,
