@@ -73,7 +73,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     <div className="flex-1 flex flex-col">
                       {post.publishedAt && (
                         <time className="text-sm text-dark/60 mb-2">
-                          {formatDate(post.publishedAt, locale)}
+                          {formatDate(post.publishedAt, locale as Locale)}
                         </time>
                       )}
                       <h3 className="text-xl font-bold mb-3 text-dark group-hover:text-primary transition-colors">

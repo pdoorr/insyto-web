@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <header className="mb-12">
           {post.publishedAt && (
             <time className="text-sm text-dark/60 mb-4 block">
-              {formatDate(post.publishedAt, locale)}
+              {formatDate(post.publishedAt, locale as Locale)}
             </time>
           )}
           <Heading as="h1" className="mb-6">

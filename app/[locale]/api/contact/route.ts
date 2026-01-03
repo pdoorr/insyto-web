@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Resend is configured
+    if (!resend) {
+      return NextResponse.json(
+        { error: 'Servizio email non configurato' },
+        { status: 503 }
+      )
+    }
+
     const body = await request.json()
     const { name, email, phone, subject, message } = body
 
@@ -20,7 +28,7 @@ export async function POST(request: NextRequest) {
     const { data, error } = await resend.emails.send({
       from: 'IN SY TO <noreply@insyto.it>',
       to: process.env.CONTACT_EMAIL || 'info@insyto.it',
-      replyTo: email,
+      reply_to: email,
       subject: `Contatto da sito web: ${subject}`,
       html: `
         <h2>Nuovo messaggio dal sito web</h2>

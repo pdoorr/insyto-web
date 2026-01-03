@@ -53,6 +53,10 @@ export function getLocalizedFromArray<T>(
   if (!items || !Array.isArray(items)) return []
 
   return items
-    .map((item) => getLocalizedField(item as any, locale))
+    .map((item) => {
+      const value = item[locale]
+      if (value) return value
+      return item.it as T
+    })
     .filter((value): value is T => value !== null && value !== undefined && value !== '')
 }

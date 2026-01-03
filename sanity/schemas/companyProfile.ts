@@ -38,17 +38,20 @@ export default defineType({
       name: 'competencies',
       title: 'Competenze',
       type: 'array',
-      of: [defineType({
-        type: 'object',
-        fields: [
-          defineField({
-            name: 'text',
-            title: 'Competenza',
-            type: 'string',
-            validation: (Rule) => Rule.required(),
-          }),
-        ],
-      })],
+      of: [
+        defineField({
+          name: 'competency',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'text',
+              title: 'Competenza',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+        }),
+      ],
     }),
     defineField({
       name: 'legalAddress',

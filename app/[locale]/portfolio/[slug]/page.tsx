@@ -112,7 +112,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <Card>
               <h3 className="font-bold mb-2">{isIt ? 'Data' : 'Date'}</h3>
               <p className="text-dark/80">
-                {formatDate(project.date, locale)}
+                {formatDate(project.date, locale as Locale)}
               </p>
             </Card>
           )}
