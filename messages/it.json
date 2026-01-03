@@ -1,0 +1,85 @@
+{
+  "common": {
+    "loading": "Caricamento...",
+    "readMore": "Leggi di più",
+    "contactUs": "Contattaci",
+    "learnMore": "Scopri di più",
+    "back": "Indietro",
+    "next": "Avanti",
+    "submit": "Invia",
+    "close": "Chiudi"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Servizi",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "Chi Siamo",
+    "contact": "Contatti",
+    "workWithUs": "Lavora con Noi"
+  },
+  "hero": {
+    "title": "Integration Systems Technology",
+    "subtitle": "Progettazione, integrazione, installazione, collaudo e certificazione di sistemi elettronici ed elettromeccanici",
+    "badge": "20+ Anni di Eccellenza",
+    "contactUs": "Contattaci",
+    "ourServices": "I nostri servizi",
+    "yearsOfExperience": "Anni di Esperienza",
+    "projectsCompleted": "Progetti Completati",
+    "satisfiedClients": "Clienti Soddisfatti"
+  },
+  "services": {
+    "title": "I Nostri Servizi",
+    "subtitle": "Soluzioni complete per ogni esigenza nel campo dei sistemi elettronici ed elettromeccanici",
+    "items": {
+      "progettazione": {
+        "name": "PROGETTAZIONE",
+        "description": "Sistemi elettrici ed elettromeccanici finalizzati alla conduzione di test su \"insiemi\" di varia complessità e natura"
+      },
+      "integrazione": {
+        "name": "INTEGRAZIONE",
+        "description": "Sistemi ed impianti \"chiavi in mano\" in ambito Spazio, Difesa, Industriale e Civile"
+      },
+      "installazione": {
+        "name": "INSTALLAZIONE",
+        "description": "Impianti tecnologici, elettrici, di radiocomunicazione e ponti radio"
+      },
+      "collaudo": {
+        "name": "COLLAUDO E CERTIFICAZIONE",
+        "description": "Documentazione, collaudo e certificazione in accordo alle norme applicabili ed agli standard di riferimento"
+      },
+      "manutenzione": {
+        "name": "MANUTENZIONE",
+        "description": "Progettazione, programmazione, esecuzione e supporto logistico integrato"
+      }
+    }
+  },
+  "sectors": {
+    "title": "Settori di Competenza",
+    "subtitle": "Esperienza pluriennale in diversi settori strategici",
+    "items": {
+      "spazio": {
+        "name": "Spazio",
+        "description": "Sistemi avanzati per applicazioni spaziali e aerospaziali"
+      },
+      "difesa": {
+        "name": "Difesa",
+        "description": "Soluzioni tecnologiche per il settore della difesa"
+      },
+      "industriale": {
+        "name": "Industriale",
+        "description": "Impianti e sistemi per l'industria manifatturiera"
+      },
+      "civile": {
+        "name": "Civile",
+        "description": "Sistemi per infrastrutture civili e pubbliche"
+      }
+    }
+  },
+  "footer": {
+    "company": "IN SY TO srl",
+    "address": "Indirizzo",
+    "vat": "P.IVA",
+    "rights": "Tutti i diritti riservati"
+  }
+}

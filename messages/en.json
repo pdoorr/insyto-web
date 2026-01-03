@@ -1,0 +1,85 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "readMore": "Read more",
+    "contactUs": "Contact us",
+    "learnMore": "Learn more",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "about": "About Us",
+    "contact": "Contact",
+    "workWithUs": "Work with Us"
+  },
+  "hero": {
+    "title": "Integration Systems Technology",
+    "subtitle": "Design, integration, installation, testing and certification of electronic and electromechanical systems",
+    "badge": "20+ Years of Excellence",
+    "contactUs": "Contact Us",
+    "ourServices": "Our Services",
+    "yearsOfExperience": "Years of Experience",
+    "projectsCompleted": "Projects Completed",
+    "satisfiedClients": "Satisfied Clients"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Complete solutions for every need in the field of electronic and electromechanical systems",
+    "items": {
+      "progettazione": {
+        "name": "DESIGN",
+        "description": "Electrical and electromechanical systems for testing assemblies of various complexity and nature"
+      },
+      "integrazione": {
+        "name": "INTEGRATION",
+        "description": "Turnkey systems and plants in Space, Defense, Industrial and Civil sectors"
+      },
+      "installazione": {
+        "name": "INSTALLATION",
+        "description": "Technological, electrical, radio communication and radio bridge systems"
+      },
+      "collaudo": {
+        "name": "TESTING AND CERTIFICATION",
+        "description": "Documentation, testing and certification in accordance with applicable standards and reference standards"
+      },
+      "manutenzione": {
+        "name": "MAINTENANCE",
+        "description": "Design, programming, execution and integrated logistical support"
+      }
+    }
+  },
+  "sectors": {
+    "title": "Sectors of Expertise",
+    "subtitle": "Long-standing experience in various strategic sectors",
+    "items": {
+      "spazio": {
+        "name": "Space",
+        "description": "Advanced systems for space and aerospace applications"
+      },
+      "difesa": {
+        "name": "Defense",
+        "description": "Technological solutions for the defense sector"
+      },
+      "industriale": {
+        "name": "Industrial",
+        "description": "Systems and plants for manufacturing industry"
+      },
+      "civile": {
+        "name": "Civil",
+        "description": "Systems for civil and public infrastructure"
+      }
+    }
+  },
+  "footer": {
+    "company": "IN SY TO srl",
+    "address": "Address",
+    "vat": "VAT",
+    "rights": "All rights reserved"
+  }
+}
