@@ -45,10 +45,39 @@ export default defineType({
       name: 'cv',
       title: 'CV',
       description: 'Curriculum Vitae del candidato',
-      type: 'reference',
-      to: [{ type: 'sanity.fileAsset' }],
-      options: {
-        filter: '_type == "sanity.fileAsset"',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'assetId',
+          title: 'Asset ID',
+          type: 'string',
+          hidden: true,
+        }),
+        defineField({
+          name: 'filename',
+          title: 'Nome file',
+          type: 'string',
+          readOnly: true,
+        }),
+        defineField({
+          name: 'url',
+          title: 'URL',
+          type: 'url',
+          readOnly: true,
+        }),
+      ],
+      preview: {
+        select: {
+          filename: 'filename',
+          url: 'url',
+        },
+        prepare(selection) {
+          const { filename, url } = selection
+          return {
+            title: filename || 'CV',
+            subtitle: url ? '📎 File caricato' : 'Nessun file',
+          }
+        },
       },
     }),
     defineField({
@@ -92,7 +121,7 @@ export default defineType({
     },
     prepare(selection) {
       const { title, subtitle, status, appliedAt, cv } = selection
-      const hasCv = cv?._ref
+      const hasCv = cv?.url
 
       return {
         title: `${title} - ${subtitle}`,
