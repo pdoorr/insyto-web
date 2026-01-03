@@ -35,22 +35,26 @@ export async function POST(request: NextRequest) {
 
     // Upload CV to Sanity if present
     let cvAsset = null
+    let cvUploadError = null
     if (cvFile) {
       try {
         const cvArrayBuffer = await cvFile.arrayBuffer()
         const cvBuffer = Buffer.from(cvArrayBuffer)
 
+        console.log('Uploading CV to Sanity assets...')
         const asset = await sanity.assets.upload('file', cvBuffer, {
           filename: cvFile.name,
         })
 
+        console.log('CV uploaded successfully:', asset._id)
         cvAsset = {
           _ref: asset._id,
           _type: 'reference',
         }
       } catch (error) {
+        cvUploadError = error
         console.error('Error uploading CV:', error)
-        // Continue without CV if upload fails
+        // Continue without CV if upload fails, but track the error
       }
     }
 
@@ -104,7 +108,11 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { success: true },
+      {
+        success: true,
+        cvUploaded: !!cvAsset,
+        cvError: cvUploadError ? 'CV non caricato' : undefined,
+      },
       { status: 200 }
     )
   } catch (error) {
