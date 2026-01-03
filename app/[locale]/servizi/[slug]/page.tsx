@@ -6,6 +6,8 @@ import { urlFor } from '@/lib/sanity/image'
 import { getLocalizedField, getLocalizedArray } from '@/lib/sanity/locale'
 import type { Locale } from '@/i18n'
 
+export const dynamic = 'force-static'
+
 export async function generateStaticParams() {
   const services = await getServices()
   return services.map((service: any) => ({

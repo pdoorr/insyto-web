@@ -7,6 +7,8 @@ import { getLocalizedField, getLocalizedArray } from '@/lib/sanity/locale'
 import { formatDate } from '@/lib/utils'
 import type { Locale } from '@/i18n'
 
+export const dynamic = 'force-static'
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts()
   return posts.map((post: any) => ({
