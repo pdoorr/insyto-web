@@ -41,7 +41,6 @@ export async function POST(request: NextRequest) {
 
         const asset = await sanity.assets.upload('file', cvBuffer, {
           filename: cvFile.name,
-          mimeType: cvFile.type,
         })
 
         cvAsset = {
