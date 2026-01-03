@@ -43,7 +43,7 @@ export default function NoteLegaliPage() {
             </Card>
 
             <Card>
-              <h2 className="text-2xl font-bold mb-4">Diritti dell'interessato</h2>
+              <h2 className="text-2xl font-bold mb-4">Diritti dell&apos;interessato</h2>
               <p className="text-dark/80 mb-4">
                 Ai sensi del GDPR, l&apos;interessato ha diritto di:
               </p>
