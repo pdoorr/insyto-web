@@ -37,7 +37,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const service = await getServiceBySlug(slug)
 
   if (!service) {
-    console.log(`Servizio non trovato per slug: ${slug}`)
     notFound()
   }
 
