@@ -68,10 +68,15 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-      await sanity.create(application)
+      const result = await sanity.create(application)
+      console.log('Application saved to Sanity:', result._id)
     } catch (error) {
       console.error('Error saving to Sanity:', error)
-      // Continue to send email even if Sanity save fails
+      // Return error instead of continuing
+      return NextResponse.json(
+        { error: 'Errore nel salvataggio della candidatura' },
+        { status: 500 }
+      )
     }
 
     // Send email notification
