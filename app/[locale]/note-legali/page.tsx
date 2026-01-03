@@ -19,11 +19,11 @@ export default function NoteLegaliPage() {
               <h2 className="text-2xl font-bold mb-4">Limitazione di responsabilità</h2>
               <p className="text-dark/80 mb-4">
                 Le pagine pubblicate sul presente sito sono pubblicate a cura di IN SY TO srl.
-                L'utilizzo del sito da parte di un Visitatore o Utente implica l'accettazione automatica delle presenti clausole.
+                L&apos;utilizzo del sito da parte di un Visitatore o Utente implica l&apos;accettazione automatica delle presenti clausole.
               </p>
               <p className="text-dark/80">
-                IN SY TO srl attua ogni ragionevole sforzo per garantire che le notizie presenti su questo sito siano aggiornate ed esenti da errori, 
-                inesattezze ed omissioni. Ciò nonostante non è possibile controllare tutte le fonti informative, che sono pertanto fornite "così come sono".
+                IN SY TO srl attua ogni ragionevole sforzo per garantire che le notizie presenti su questo sito siano aggiornate ed esenti da errori,
+                inesattezze ed omissioni. Ciò nonostante non è possibile controllare tutte le fonti informative, che sono pertanto fornite &quot;così come sono&quot;.
               </p>
             </Card>
 
@@ -45,7 +45,7 @@ export default function NoteLegaliPage() {
             <Card>
               <h2 className="text-2xl font-bold mb-4">Diritti dell'interessato</h2>
               <p className="text-dark/80 mb-4">
-                Ai sensi del GDPR, l'interessato ha diritto di:
+                Ai sensi del GDPR, l&apos;interessato ha diritto di:
               </p>
               <ul className="list-disc pl-6 text-dark/80 space-y-2">
                 <li>Accedere ai propri dati personali</li>

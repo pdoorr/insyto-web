@@ -47,7 +47,7 @@ export default function LavoraConNoiPage() {
               <Card>
                 <h2 className="text-2xl font-bold mb-4">Cosa cerchiamo</h2>
                 <p className="text-dark/80 mb-4">
-                  Siamo sempre alla ricerca di professionisti qualificati nel campo dell'ingegneria elettronica, 
+                  Siamo sempre alla ricerca di professionisti qualificati nel campo dell&apos;ingegneria elettronica,
                   elettromeccanica, automazione e telecomunicazioni.
                 </p>
                 <p className="text-dark/80">

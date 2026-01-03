@@ -75,7 +75,7 @@ export default function JobApplicationForm() {
       {submitStatus === 'error' && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-3">
           <AlertCircle className="w-5 h-5 text-red-600" />
-          <p className="text-red-800">Errore nell'invio della candidatura. Riprova più tardi.</p>
+          <p className="text-red-800">Errore nell&apos;invio della candidatura. Riprova più tardi.</p>
         </div>
       )}
 

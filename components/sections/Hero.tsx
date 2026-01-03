@@ -14,7 +14,8 @@ export default function Hero({ locale: propLocale }: HeroProps = {}) {
   const t = useTranslations('hero')
   const tCommon = useTranslations('common')
   const tNav = useTranslations('nav')
-  const componentLocale = propLocale || (useLocale() as Locale)
+  const hookLocale = useLocale() as Locale
+  const componentLocale = propLocale || hookLocale
 
   const isIt = componentLocale === 'it'
 
