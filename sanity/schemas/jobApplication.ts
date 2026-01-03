@@ -44,16 +44,12 @@ export default defineType({
     defineField({
       name: 'cv',
       title: 'CV',
-      type: 'object',
       description: 'Curriculum Vitae del candidato',
-      fields: [
-        {
-          name: 'asset',
-          type: 'reference',
-          to: [{ type: 'sanity.fileAsset' }],
-          title: 'File',
-        },
-      ],
+      type: 'reference',
+      to: [{ type: 'sanity.fileAsset' }],
+      options: {
+        filter: '_type == "sanity.fileAsset"',
+      },
     }),
     defineField({
       name: 'status',
@@ -96,7 +92,7 @@ export default defineType({
     },
     prepare(selection) {
       const { title, subtitle, status, appliedAt, cv } = selection
-      const hasCv = cv?.asset?._ref
+      const hasCv = cv?._ref
 
       return {
         title: `${title} - ${subtitle}`,
