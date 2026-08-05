@@ -77,7 +77,7 @@ export default function Footer({ locale }: FooterProps) {
               <span className="label-instrument block">
                 {locale === 'it' ? 'Sede operativa' : 'Operations'}
               </span>
-              Via Carlo Todini, 33 — 00012 Guidonia (RM)
+              Via Umberto Agnelli, 24 — 00012 Albuccione (RM)
             </span>
           </address>
         </div>

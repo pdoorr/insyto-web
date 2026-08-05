@@ -33,7 +33,7 @@ export default defineType({
       name: 'operationalAddress',
       title: 'Indirizzo operativo',
       type: 'string',
-      initialValue: 'Via Carlo Todini, 33 – 00012 – Guidonia (RM)',
+      initialValue: 'Via Umberto Agnelli, 24 – 00012 – Albuccione (RM)',
     }),
     defineField({
       name: 'vat',

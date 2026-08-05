@@ -26,8 +26,8 @@ const staticProfile = {
     city: '00142 – Roma',
   },
   operationalAddress: {
-    address: 'Via Carlo Todini, 33',
-    city: '00012 – Guidonia (RM)',
+    address: 'Via Umberto Agnelli, 24',
+    city: '00012 – Albuccione (RM)',
   },
 }
 

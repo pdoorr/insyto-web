@@ -64,8 +64,8 @@ export default function ContattiPage() {
                   <div>
                     <h3 className="font-bold mb-2">Sede Operativa</h3>
                     <p className="text-dark/80">
-                      Via Carlo Todini, 33<br />
-                      00012 – Guidonia (RM)
+                      Via Umberto Agnelli, 24<br />
+                      00012 – Albuccione (RM)
                     </p>
                   </div>
                 </div>

@@ -63,7 +63,7 @@ export default function NoteLegaliPage() {
               <p className="text-dark/80">
                 <strong>IN SY TO srl</strong><br />
                 Sede legale: Via Benedetto Croce, 34 – 00142 – Roma<br />
-                Sede operativa: Via Carlo Todini, 33 – 00012 – Guidonia (RM)<br />
+                Sede operativa: Via Umberto Agnelli, 24 – 00012 – Albuccione (RM)<br />
                 P. IVA: 11709001009<br />
                 Email: <a href="mailto:info@insyto.it" className="text-primary hover:underline">info@insyto.it</a>
               </p>
