@@ -45,6 +45,9 @@ temp-images/
 
 
 # migrazione WordPress (output generato da lib/migrate-wxr.py)
+# Nota: il downloader dei media e' invece versionato in
+# scripts/download-wp-media.sh, perche' il sito di origine e' fermo e la lista
+# di URL non cambia piu'.
 sanity-import.ndjson
 media-manifest.json
 download-media.sh
