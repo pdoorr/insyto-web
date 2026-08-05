@@ -9,6 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // ---------------------------------------------------------------
+        // Due mondi visivi, non due palette dello stesso sito.
+        //
+        // "instrument" e' il banco di misura: fondo scuro, graticola, un solo
+        // colore di segnale. Regge la home e le pagine dove si mostra la
+        // verifica.
+        //
+        // "sheet" e' la tavola di disegno esecutivo: carta fredda, inchiostro,
+        // rosso solo per i segni di revisione. Regge le pagine di capability,
+        // dove conta il rigore documentale.
+        //
+        // I due non vanno mescolati nella stessa sezione.
+        // ---------------------------------------------------------------
+        instrument: {
+          ground: '#090E12',
+          panel: '#0F161B',
+          rule: '#1D2930',
+          text: '#B7C6CD',
+          dim: '#6B7F89',
+          bright: '#F1F6F8',
+          signal: '#FFB03A',
+          ok: '#59C08A',
+        },
+        sheet: {
+          paper: '#E6E9E4',
+          surface: '#F1F3EF',
+          ink: '#12181B',
+          soft: '#48544F',
+          hair: '#9DA9A4',
+          hairline: '#C4CDC8',
+          revision: '#B33A28',
+        },
         // Primary - Blu principale del testo "INSYTO"
         primary: {
           DEFAULT: '#2c5f7c',
@@ -40,8 +72,21 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        // Titoli e dati del banco di misura: il monospaziato allinea le cifre
+        // in colonna, non e' un vezzo estetico.
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        // Scritte della tavola tecnica, come le annotazioni di un disegno.
+        draft: ['var(--font-draft)', 'ui-monospace', 'monospace'],
+      },
+      backgroundImage: {
+        // Graticola dello strumento.
+        graticule:
+          'linear-gradient(rgba(126,168,186,.075) 1px, transparent 1px),' +
+          'linear-gradient(90deg, rgba(126,168,186,.075) 1px, transparent 1px)',
+      },
+      backgroundSize: {
+        graticule: '44px 44px',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

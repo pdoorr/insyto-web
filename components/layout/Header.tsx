@@ -3,210 +3,144 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, Globe } from 'lucide-react'
-import { Button } from '@/components/ui'
+import { Menu, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { locales, localeNames, localeFlags, type Locale } from '@/i18n'
+import { usePathname } from 'next/navigation'
+import { locales, localeNames, type Locale } from '@/i18n'
+import { cn } from '@/lib/utils'
 
 interface HeaderProps {
   locale: Locale
 }
 
+/**
+ * Barra di strumento, costante su tutto il sito.
+ *
+ * Resta scura anche sopra le pagine "tavola": il foglio è un documento dentro
+ * l'applicazione, e la barra è la cornice che lo contiene.
+ *
+ * Il sottomenu dei servizi è stato tolto: elencava quattro slug fissi, uno dei
+ * quali (/servizi/radiocomunicazione) non esisteva più dopo la migrazione. La
+ * pagina /servizi ora fa quel lavoro, e resta sincronizzata con il CMS.
+ */
 export default function Header({ locale: currentLocale }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
-  const [langMenuOpen, setLangMenuOpen] = useState(false)
+  const pathname = usePathname()
   const t = useTranslations('nav')
-  const tCommon = useTranslations('common')
 
   const navigation = [
-    { name: t('home'), href: '/' },
-    { name: t('about'), href: '/profilo' },
-    {
-      name: t('services'),
-      href: '/servizi',
-      submenu: [
-        { name: 'Macchine', href: '/servizi/macchine' },
-        { name: 'Impianti', href: '/servizi/impianti' },
-        { name: 'Sistemi Elettronici', href: '/servizi/sistemi-elettronici' },
-        { name: 'Radiocomunicazione', href: '/servizi/radiocomunicazione' },
-      ],
-    },
+    { name: t('services'), href: '/servizi' },
     { name: t('portfolio'), href: '/portfolio' },
-    { name: t('blog'), href: '/blog' },
+    { name: t('about'), href: '/profilo' },
     { name: t('workWithUs'), href: '/lavora-con-noi' },
     { name: t('contact'), href: '/contatti' },
   ]
 
   const localePath = (path: string) => `/${currentLocale}${path}`
 
-  const switchLocale = (newLocale: Locale) => {
-    if (typeof window !== 'undefined') {
-      const pathWithoutLocale = window.location.pathname.replace(`/${currentLocale}`, '') || '/'
-      return `/${newLocale}${pathWithoutLocale}`
-    }
-    return `/${newLocale}`
+  const switchLocale = (target: Locale) => {
+    const rest = pathname.replace(new RegExp(`^/${currentLocale}`), '') || ''
+    return `/${target}${rest}`
   }
 
+  const isActive = (href: string) => pathname.startsWith(`/${currentLocale}${href}`)
+
   return (
-    <header className="sticky top-0 z-50 glass border-b border-white/20">
-      <nav className="container-custom">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href={localePath('/')} className="flex items-center">
-            <Image
-              src="/logo.png"
-              alt="IN SY TO - Integration Systems Technology"
-              width={150}
-              height={40}
-              priority
-            />
-          </Link>
+    <header className="sticky top-0 z-50 border-b rule-instrument bg-instrument-ground/95 backdrop-blur">
+      <nav className="flex items-center gap-6 px-5 py-4 sm:px-8 lg:px-10">
+        <Link href={localePath('/')} className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="IN SY TO — Integration Systems Technology"
+            width={132}
+            height={35}
+            priority
+          />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => {
-              if (item.submenu) {
-                return (
-                  <div
-                    key={item.name}
-                    className="relative group"
-                    onMouseEnter={() => setServicesOpen(true)}
-                    onMouseLeave={() => setServicesOpen(false)}
-                  >
-                    <button className="text-dark hover:text-primary transition-colors font-medium">
-                      {item.name}
-                    </button>
-                    {servicesOpen && (
-                      <div className="absolute top-full left-0 -mt-1 w-64 glass rounded-lg shadow-lg p-2">
-                        {item.submenu.map((subitem) => (
-                          <Link
-                            key={subitem.name}
-                            href={localePath(subitem.href)}
-                            className="block px-4 py-2 text-sm text-dark hover:text-primary hover:bg-primary/10 rounded transition-colors"
-                          >
-                            {subitem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )
-              }
-              return (
-                <Link
-                  key={item.name}
-                  href={localePath(item.href)}
-                  className="text-dark hover:text-primary transition-colors font-medium"
-                >
-                  {item.name}
-                </Link>
-              )
-            })}
-            <Button href={localePath('/contatti')} size="sm">
-              {tCommon('contactUs')}
-            </Button>
+        <ul className="ml-auto hidden items-center gap-7 lg:flex">
+          {navigation.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={localePath(item.href)}
+                className={cn(
+                  'font-mono text-[11px] uppercase tracking-[0.12em] transition-colors',
+                  isActive(item.href)
+                    ? 'text-instrument-signal'
+                    : 'text-instrument-dim hover:text-instrument-text'
+                )}
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-            {/* Language Switcher */}
-            <div
-              className="relative"
-              onMouseEnter={() => setLangMenuOpen(true)}
-              onMouseLeave={() => setLangMenuOpen(false)}
-            >
-              <button className="flex items-center space-x-2 text-dark hover:text-primary transition-colors font-medium">
-                <Globe size={18} />
-                <span>{localeFlags[currentLocale]} {localeNames[currentLocale]}</span>
-              </button>
-              {langMenuOpen && (
-                <div className="absolute top-full right-0 -mt-1 w-40 glass rounded-lg shadow-lg p-2">
-                  {locales.map((loc) => (
-                    <Link
-                      key={loc}
-                      href={switchLocale(loc)}
-                      className={`block px-4 py-2 text-sm hover:text-primary hover:bg-primary/10 rounded transition-colors ${
-                        loc === currentLocale ? 'text-primary font-medium' : 'text-dark'
-                      }`}
-                    >
-                      {localeFlags[loc]} {localeNames[loc]}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+        <ul className="hidden items-center gap-3 lg:flex">
+          {locales.map((loc) => (
+            <li key={loc}>
+              <Link
+                href={switchLocale(loc)}
+                lang={loc}
+                aria-current={loc === currentLocale ? 'true' : undefined}
+                className={cn(
+                  'font-mono text-[11px] uppercase tracking-[0.12em] transition-colors',
+                  loc === currentLocale
+                    ? 'text-instrument-bright'
+                    : 'text-instrument-dim hover:text-instrument-text'
+                )}
+              >
+                <span className="sr-only">{localeNames[loc]}</span>
+                <span aria-hidden="true">{loc}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-          {/* Mobile menu button */}
-          <button
-            className="lg:hidden p-2 text-dark"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-white/20">
-            {navigation.map((item) => {
-              if (item.submenu) {
-                return (
-                  <div key={item.name} className="py-2">
-                    <div className="text-dark font-medium mb-2">{item.name}</div>
-                    <div className="pl-4 space-y-1">
-                      {item.submenu.map((subitem) => (
-                        <Link
-                          key={subitem.name}
-                          href={localePath(subitem.href)}
-                          className="block py-2 text-sm text-dark/80 hover:text-primary transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {subitem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )
-              }
-              return (
-                <Link
-                  key={item.name}
-                  href={localePath(item.href)}
-                  className="block py-2 text-dark hover:text-primary transition-colors font-medium"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              )
-            })}
-            <div className="pt-4 space-y-2">
-              <Button href={localePath('/contatti')} className="w-full" size="sm">
-                {tCommon('contactUs')}
-              </Button>
-
-              {/* Mobile Language Switcher */}
-              <div className="pt-2 border-t border-white/20">
-                <div className="text-sm text-dark/60 mb-2">Language</div>
-                <div className="space-y-1">
-                  {locales.map((loc) => (
-                    <Link
-                      key={loc}
-                      href={switchLocale(loc)}
-                      className={`block px-4 py-2 text-sm hover:text-primary hover:bg-primary/10 rounded transition-colors ${
-                        loc === currentLocale ? 'text-primary font-medium' : 'text-dark'
-                      }`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {localeFlags[loc]} {localeNames[loc]}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <button
+          type="button"
+          className="ml-auto p-2 text-instrument-text lg:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-expanded={mobileMenuOpen}
+          aria-label="Menu"
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </nav>
+
+      {mobileMenuOpen && (
+        <div className="border-t rule-instrument lg:hidden">
+          <ul>
+            {navigation.map((item) => (
+              <li key={item.href} className="border-b rule-instrument">
+                <Link
+                  href={localePath(item.href)}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-5 py-4 font-mono text-[12px] uppercase tracking-[0.1em] text-instrument-text"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="flex gap-5 px-5 py-4">
+            {locales.map((loc) => (
+              <Link
+                key={loc}
+                href={switchLocale(loc)}
+                lang={loc}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  'font-mono text-[12px] uppercase tracking-[0.12em]',
+                  loc === currentLocale ? 'text-instrument-bright' : 'text-instrument-dim'
+                )}
+              >
+                {localeNames[loc]}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   )
 }
-

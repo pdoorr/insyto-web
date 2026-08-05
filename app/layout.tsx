@@ -1,18 +1,7 @@
+// I font sono dichiarati in app/[locale]/layout.tsx, che e' il layout che
+// possiede <html> e <body>: qui sarebbero scaricati e mai applicati.
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
 import './[locale]/globals.css'
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'IN SY TO - Integration Systems Technology',

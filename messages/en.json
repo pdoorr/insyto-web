@@ -11,70 +11,113 @@
   },
   "nav": {
     "home": "Home",
-    "services": "Services",
-    "portfolio": "Portfolio",
-    "blog": "Blog",
-    "about": "About Us",
+    "services": "Capabilities",
+    "portfolio": "Programmes",
+    "blog": "Notes",
+    "about": "Company",
     "contact": "Contact",
-    "workWithUs": "Work with Us"
+    "workWithUs": "Careers"
   },
   "hero": {
-    "title": "Integration Systems Technology",
-    "subtitle": "Design, integration, installation, testing and certification of electronic and electromechanical systems",
-    "badge": "20+ Years of Excellence",
-    "contactUs": "Contact Us",
-    "ourServices": "Our Services",
-    "yearsOfExperience": "Years of Experience",
-    "projectsCompleted": "Projects Completed",
-    "satisfiedClients": "Satisfied Clients"
+    "kicker": "Design · Integration · Verification",
+    "titleLead": "Nothing flies until something on the ground",
+    "titleAccent": "proves it",
+    "subtitle": "Modular electrical, RF and functional test infrastructure. It shortens integration time, automates verification and extends the life of existing AIT facilities instead of replacing them.",
+    "primaryAction": "Request the capability statement",
+    "secondaryAction": "See capabilities",
+    "channelsLabel": "Channels",
+    "channelsHint": "Select a channel to read its trace.",
+    "traceStart": "T −5.0 s",
+    "traceActive": "Active channel",
+    "traceEnd": "T 0.0 s"
+  },
+  "telemetry": {
+    "operatingSince": "Operating since",
+    "operatingSinceValue": "2008",
+    "incorporated": "Incorporated",
+    "incorporatedValue": "2012",
+    "sectors": "Sectors",
+    "sectorsValue": "04",
+    "compliance": "Compliance",
+    "complianceValue": "DM 37/08",
+    "complianceSuffix": "CE"
   },
   "services": {
-    "title": "Our Services",
-    "subtitle": "Complete solutions for every need in the field of electronic and electromechanical systems",
+    "title": "Capabilities",
+    "subtitle": "Five channels, from the first drawing to the maintenance plan. Each one leaves behind the documents that make it verifiable.",
+    "sheetTitle": "What we build, and what we hand over with it",
+    "sheetIntro": "Design, construction and integration of electronic and electromechanical systems. Every delivery ships with its own file: test procedures, acceptance results, declaration of conformity. That file is what makes a supplier qualifiable.",
+    "revisionNote": "Rev. 02 — declaration of conformity DM 37/08",
     "items": {
       "progettazione": {
-        "name": "DESIGN",
-        "description": "Electrical and electromechanical systems for testing assemblies of various complexity and nature"
+        "name": "Design",
+        "short": "Systems built to run tests on assemblies of varying complexity.",
+        "description": "Electrical and electromechanical systems designed to run tests on assemblies of varying complexity and nature, from the preliminary design submitted at proposal stage through to the user manual."
       },
       "integrazione": {
-        "name": "INTEGRATION",
-        "description": "Turnkey systems and plants in Space, Defense, Industrial and Civil sectors"
+        "name": "Integration",
+        "short": "Turnkey systems and installations for Space, Defence, Industrial and Civil.",
+        "description": "Turnkey systems and installations across Space, Defence, Industrial and Civil programmes, including data acquisition and processing systems."
       },
       "installazione": {
-        "name": "INSTALLATION",
-        "description": "Technological, electrical, radio communication and radio bridge systems"
+        "name": "Installation",
+        "short": "Technological, electrical, radiocommunication and radio-link installations.",
+        "description": "Technological and electrical installations, radiocommunication systems and radio links: control panels, transformer substations, earthing, network cabling and optical fibre."
       },
       "collaudo": {
-        "name": "TESTING AND CERTIFICATION",
-        "description": "Documentation, testing and certification in accordance with applicable standards and reference standards"
+        "name": "Test & certification",
+        "short": "Acceptance testing and certification against the applicable standards.",
+        "description": "Documentation, acceptance testing and certification against the applicable standards, including the AIV plan with its test cases and test procedures, and CE marking on complete systems."
       },
       "manutenzione": {
-        "name": "MAINTENANCE",
-        "description": "Design, programming, execution and integrated logistical support"
+        "name": "Maintenance",
+        "short": "Preventive and corrective plans, with integrated logistic support.",
+        "description": "Planning, scheduling and execution of preventive and corrective maintenance on delivered systems, with integrated logistic support."
       }
     }
   },
   "sectors": {
-    "title": "Sectors of Expertise",
-    "subtitle": "Long-standing experience in various strategic sectors",
+    "title": "Where the systems end up",
+    "subtitle": "The environment sets the tolerance. These four set ours.",
     "items": {
       "spazio": {
         "name": "Space",
-        "description": "Advanced systems for space and aerospace applications"
+        "description": "Ground support and verification equipment for space programmes."
       },
       "difesa": {
-        "name": "Defense",
-        "description": "Technological solutions for the defense sector"
+        "name": "Defence",
+        "description": "Systems and installations for defence programmes and their test facilities."
       },
       "industriale": {
         "name": "Industrial",
-        "description": "Systems and plants for manufacturing industry"
+        "description": "Purpose-built machines and plant for manufacturing and process industry."
       },
       "civile": {
         "name": "Civil",
-        "description": "Systems for civil and public infrastructure"
+        "description": "Electrical and telecommunication installations for civil infrastructure."
       }
     }
+  },
+  "sheet": {
+    "client": "Client",
+    "subject": "Subject",
+    "subjectValue": "Capabilities",
+    "scale": "Scale",
+    "scaleValue": "1:1",
+    "date": "Date",
+    "revision": "Rev.",
+    "revisionValue": "02",
+    "sheetNo": "Sheet",
+    "standards": "Standards applied",
+    "standardsValue": "DM 37/08 · CEI · CE marking",
+    "deliverables": "Delivered with",
+    "deliverablesValue": "AIV plan · test cases · test procedures"
+  },
+  "cta": {
+    "title": "Tell us what you need to verify",
+    "body": "Send us the assembly, the interface or the procedure that is holding up integration. We will tell you whether it is a retrofit, a module or a full system — and what it takes.",
+    "action": "Request the capability statement",
+    "note": "Technical detail is shared after NDA and export-control assessment."
   },
   "footer": {
     "company": "IN SY TO srl",

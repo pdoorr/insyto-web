@@ -2,24 +2,33 @@ import { HTMLAttributes, forwardRef } from 'react'
 import { cn } from '@/lib/utils'
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'glass' | 'dark'
+  /**
+   * A quale mondo visivo appartiene la superficie.
+   * - `sheet`: tavola tecnica, per le pagine di capability
+   * - `instrument`: pannello del banco di misura, per home e verifica
+   */
+  variant?: 'sheet' | 'instrument'
   hover?: boolean
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'default', hover = false, ...props }, ref) => {
+  ({ className, variant = 'sheet', hover = false, ...props }, ref) => {
+    // Niente angoli arrotondati: non li ha ne' una tavola ne' un pannello di
+    // strumento, ed e' quello che distingue queste superfici da una card generica.
     const variants = {
-      default: 'bg-white border border-gray-200',
-      glass: 'glass shadow-lg',
-      dark: 'glass-dark text-white',
+      sheet: 'bg-sheet-surface border border-sheet-hairline text-sheet-ink',
+      instrument: 'bg-instrument-panel border border-instrument-rule text-instrument-text',
     }
-    
-    const hoverEffect = hover ? 'transition-all duration-300 hover:shadow-xl hover:-translate-y-1' : ''
-    
+
+    const hoverEffect = {
+      sheet: 'transition-colors duration-200 hover:border-sheet-hair',
+      instrument: 'transition-colors duration-200 hover:border-instrument-signal/50',
+    }
+
     return (
       <div
         ref={ref}
-        className={cn('rounded-xl p-6', variants[variant], hoverEffect, className)}
+        className={cn('p-6', variants[variant], hover && hoverEffect[variant], className)}
         {...props}
       />
     )
@@ -29,4 +38,3 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 Card.displayName = 'Card'
 
 export default Card
-

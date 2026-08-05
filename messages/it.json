@@ -11,70 +11,113 @@
   },
   "nav": {
     "home": "Home",
-    "services": "Servizi",
-    "portfolio": "Portfolio",
-    "blog": "Blog",
-    "about": "Chi Siamo",
+    "services": "Capacità",
+    "portfolio": "Programmi",
+    "blog": "Note",
+    "about": "Azienda",
     "contact": "Contatti",
-    "workWithUs": "Lavora con Noi"
+    "workWithUs": "Lavora con noi"
   },
   "hero": {
-    "title": "Integration Systems Technology",
-    "subtitle": "Progettazione, integrazione, installazione, collaudo e certificazione di sistemi elettronici ed elettromeccanici",
-    "badge": "20+ Anni di Eccellenza",
-    "contactUs": "Contattaci",
-    "ourServices": "I nostri servizi",
-    "yearsOfExperience": "Anni di Esperienza",
-    "projectsCompleted": "Progetti Completati",
-    "satisfiedClients": "Clienti Soddisfatti"
+    "kicker": "Progettazione · Integrazione · Verifica",
+    "titleLead": "Niente vola finché qualcosa a terra non lo",
+    "titleAccent": "dimostra",
+    "subtitle": "Infrastrutture modulari di test elettrico, RF e funzionale. Riducono i tempi di integrazione, automatizzano la verifica e prolungano la vita degli impianti AIT esistenti, invece di sostituirli.",
+    "primaryAction": "Richiedi il capability statement",
+    "secondaryAction": "Vedi le capacità",
+    "channelsLabel": "Canali",
+    "channelsHint": "Seleziona un canale per leggerne il tracciato.",
+    "traceStart": "T −5,0 s",
+    "traceActive": "Canale attivo",
+    "traceEnd": "T 0,0 s"
+  },
+  "telemetry": {
+    "operatingSince": "Operativi dal",
+    "operatingSinceValue": "2008",
+    "incorporated": "Srl costituita",
+    "incorporatedValue": "2012",
+    "sectors": "Settori",
+    "sectorsValue": "04",
+    "compliance": "Conformità",
+    "complianceValue": "DM 37/08",
+    "complianceSuffix": "CE"
   },
   "services": {
-    "title": "I Nostri Servizi",
-    "subtitle": "Soluzioni complete per ogni esigenza nel campo dei sistemi elettronici ed elettromeccanici",
+    "title": "Capacità",
+    "subtitle": "Cinque canali, dal primo disegno al piano di manutenzione. Ognuno lascia dietro di sé i documenti che lo rendono verificabile.",
+    "sheetTitle": "Che cosa costruiamo, e che cosa consegniamo insieme",
+    "sheetIntro": "Progettazione, costruzione e integrazione di sistemi elettronici ed elettromeccanici. Ogni consegna esce con il suo fascicolo: procedure di prova, esiti di collaudo, dichiarazione di conformità. È quel fascicolo a rendere un fornitore qualificabile.",
+    "revisionNote": "Rev. 02 — dichiarazione di conformità DM 37/08",
     "items": {
       "progettazione": {
-        "name": "PROGETTAZIONE",
-        "description": "Sistemi elettrici ed elettromeccanici finalizzati alla conduzione di test su \"insiemi\" di varia complessità e natura"
+        "name": "Progettazione",
+        "short": "Sistemi finalizzati alla conduzione di test su insiemi di varia complessità.",
+        "description": "Sistemi elettrici ed elettromeccanici finalizzati alla conduzione di test su insiemi di varia complessità e natura, dal progetto preliminare in fase di proposizione fino al manuale d'uso."
       },
       "integrazione": {
-        "name": "INTEGRAZIONE",
-        "description": "Sistemi ed impianti \"chiavi in mano\" in ambito Spazio, Difesa, Industriale e Civile"
+        "name": "Integrazione",
+        "short": "Sistemi e impianti chiavi in mano per Spazio, Difesa, Industriale e Civile.",
+        "description": "Sistemi e impianti chiavi in mano in ambito Spazio, Difesa, Industriale e Civile, compresi i sistemi di acquisizione ed elaborazione dati."
       },
       "installazione": {
-        "name": "INSTALLAZIONE",
-        "description": "Impianti tecnologici, elettrici, di radiocomunicazione e ponti radio"
+        "name": "Installazione",
+        "short": "Impianti tecnologici, elettrici, di radiocomunicazione e ponti radio.",
+        "description": "Impianti tecnologici ed elettrici, sistemi di radiocomunicazione e ponti radio: quadri di controllo, cabine di trasformazione, messa a terra, cablaggi di rete e fibre ottiche."
       },
       "collaudo": {
-        "name": "COLLAUDO E CERTIFICAZIONE",
-        "description": "Documentazione, collaudo e certificazione in accordo alle norme applicabili ed agli standard di riferimento"
+        "name": "Collaudo e certificazione",
+        "short": "Collaudo e certificazione secondo le norme applicabili.",
+        "description": "Documentazione, collaudo e certificazione in accordo alle norme applicabili e agli standard di riferimento, compreso l'AIV plan con test case e procedure di prova, e la marcatura CE sui sistemi completi."
       },
       "manutenzione": {
-        "name": "MANUTENZIONE",
-        "description": "Progettazione, programmazione, esecuzione e supporto logistico integrato"
+        "name": "Manutenzione",
+        "short": "Piani preventivi e correttivi, con supporto logistico integrato.",
+        "description": "Progettazione, programmazione ed esecuzione di manutenzione preventiva e correttiva sui sistemi consegnati, con supporto logistico integrato."
       }
     }
   },
   "sectors": {
-    "title": "Settori di Competenza",
-    "subtitle": "Esperienza pluriennale in diversi settori strategici",
+    "title": "Dove finiscono i sistemi",
+    "subtitle": "È l'ambiente a fissare la tolleranza. Questi quattro fissano la nostra.",
     "items": {
       "spazio": {
         "name": "Spazio",
-        "description": "Sistemi avanzati per applicazioni spaziali e aerospaziali"
+        "description": "Equipaggiamenti di terra e di verifica per programmi spaziali."
       },
       "difesa": {
         "name": "Difesa",
-        "description": "Soluzioni tecnologiche per il settore della difesa"
+        "description": "Sistemi e impianti per programmi della difesa e per i loro banchi di prova."
       },
       "industriale": {
         "name": "Industriale",
-        "description": "Impianti e sistemi per l'industria manifatturiera"
+        "description": "Macchine e impianti su requisito per industria manifatturiera e di processo."
       },
       "civile": {
         "name": "Civile",
-        "description": "Sistemi per infrastrutture civili e pubbliche"
+        "description": "Impianti elettrici e di telecomunicazione per infrastrutture civili."
       }
     }
+  },
+  "sheet": {
+    "client": "Committente",
+    "subject": "Oggetto",
+    "subjectValue": "Capacità",
+    "scale": "Scala",
+    "scaleValue": "1:1",
+    "date": "Data",
+    "revision": "Rev.",
+    "revisionValue": "02",
+    "sheetNo": "Foglio",
+    "standards": "Norme applicate",
+    "standardsValue": "DM 37/08 · CEI · marcatura CE",
+    "deliverables": "Consegnato con",
+    "deliverablesValue": "AIV plan · test case · procedure di prova"
+  },
+  "cta": {
+    "title": "Diteci che cosa dovete verificare",
+    "body": "Mandateci l'insieme, l'interfaccia o la procedura che sta rallentando l'integrazione. Vi diciamo se è un retrofit, un modulo o un sistema completo — e che cosa serve.",
+    "action": "Richiedi il capability statement",
+    "note": "Il dettaglio tecnico viene condiviso dopo NDA e valutazione export control."
   },
   "footer": {
     "company": "IN SY TO srl",

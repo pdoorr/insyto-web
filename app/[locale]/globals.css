@@ -2,161 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --font-inter: 'Inter', system-ui, sans-serif;
-    --font-space-grotesk: 'Space Grotesk', system-ui, sans-serif;
-  }
+/*
+  Due mondi visivi, tenuti separati:
 
+  - "instrument" (banco di misura) per home e pagine di verifica;
+  - "sheet" (tavola di disegno esecutivo) per le pagine di capability.
+
+  Le utility qui sotto sono prefissate di conseguenza. Non mescolarle nella
+  stessa sezione: l'effetto dipende dal fatto che ogni superficie appartenga
+  a un mondo solo.
+*/
+
+@layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-light text-dark;
+    @apply bg-instrument-ground text-instrument-text font-sans;
+  }
+
+  ::selection {
+    @apply bg-instrument-signal/30;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-instrument-signal ring-offset-2 ring-offset-instrument-ground;
+  }
+
+  .sheet-world :focus-visible {
+    @apply ring-primary ring-offset-sheet-surface;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 }
 
 @layer components {
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-10;
   }
 
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-20 md:py-28;
+  }
+
+  /* --------------------------------------------------------- strumento */
+
+  /* Etichetta da pannello: piccola, spaziata, monospaziata. */
+  .label-instrument {
+    @apply font-mono text-[10.5px] tracking-[0.16em] uppercase text-instrument-dim;
+  }
+
+  .rule-instrument {
+    @apply border-instrument-rule;
+  }
+
+  /* Graticola di fondo, come la griglia di un oscilloscopio. */
+  .graticule {
+    background-image: theme('backgroundImage.graticule');
+    background-size: theme('backgroundSize.graticule');
+  }
+
+  /* ---------------------------------------------------------- tavola */
+
+  .sheet-world {
+    @apply bg-sheet-paper text-sheet-ink;
+  }
+
+  /* Il foglio: cornice esterna piu' filo interno, come una tavola reale. */
+  .sheet-frame {
+    @apply relative border border-sheet-ink bg-sheet-surface;
+  }
+
+  .sheet-frame::before {
+    content: '';
+    @apply absolute inset-[7px] border border-sheet-hairline pointer-events-none;
+  }
+
+  .label-sheet {
+    @apply font-draft text-[10px] tracking-[0.16em] uppercase text-sheet-hair;
+  }
+
+  /* Titolo di tavola: Source Code Pro in grassetto, maiuscolo, serrato. */
+  .title-sheet {
+    @apply font-draft font-semibold uppercase tracking-[-0.02em] text-sheet-ink;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
-    background-size: 200% auto;
-    animation: shine 4s linear infinite;
+  .tabular {
+    font-variant-numeric: tabular-nums;
   }
-
-  /* Animated gradient text with more colors */
-  .text-gradient-animated {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      90deg,
-      #2c5f7c 0%,
-      #6b9cb3 25%,
-      #2c5f7c 50%,
-      #4a7a96 75%,
-      #2c5f7c 100%
-    );
-    background-size: 200% auto;
-    animation: gradientFlow 6s ease infinite;
-  }
-
-  @keyframes gradientFlow {
-    0% {
-      background-position: 0% center;
-    }
-    50% {
-      background-position: 100% center;
-    }
-    100% {
-      background-position: 0% center;
-    }
-  }
-
-  .glass {
-    @apply bg-white/80 backdrop-blur-md border border-white/20;
-  }
-
-  .glass-dark {
-    @apply bg-dark/80 backdrop-blur-md border border-white/10;
-  }
-
-  /* Animated gradient background */
-  .animate-gradient {
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-  }
-
-  /* Smooth hover transitions */
-  .hover-lift {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  .hover-lift:hover {
-    @apply -translate-y-2 shadow-2xl;
-  }
-
-  /* Glow effects */
-  .glow-primary {
-    box-shadow: 0 0 40px rgba(44, 95, 124, 0.3);
-  }
-
-  .glow-accent {
-    box-shadow: 0 0 40px rgba(107, 156, 179, 0.3);
-  }
-
-  /* Floating animation */
-  .float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes gradientShift {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 200% center;
-    }
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-
-  /* Pulse glow animation */
-  .pulse-glow {
-    animation: pulseGlow 2s ease-in-out infinite;
-  }
-
-  @keyframes pulseGlow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(44, 95, 124, 0.4);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(44, 95, 124, 0.8);
-    }
-  }
-
-  /* Text reveal animation */
-  .reveal {
-    animation: reveal 0.8s ease-out forwards;
-  }
-
-  @keyframes reveal {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Stagger animations for lists */
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
 }
-

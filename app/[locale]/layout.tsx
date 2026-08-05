@@ -2,20 +2,29 @@ import { Header, Footer } from '@/components/layout'
 import { generateStructuredData } from '@/lib/seo'
 import type { Metadata } from 'next'
 import type { Locale } from '@/i18n'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Geist, Geist_Mono, Source_Code_Pro } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import './globals.css'
 
-const inter = Inter({
+const sans = Geist({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
   display: 'swap',
 })
 
-const spaceGrotesk = Space_Grotesk({
+// Banco di misura: titoli, etichette e valori.
+const mono = Geist_Mono({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+// Tavola tecnica: titoli e annotazioni delle pagine di capability.
+const draft = Source_Code_Pro({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-draft',
   display: 'swap',
 })
 
@@ -46,8 +55,8 @@ export default async function LocaleLayout({
   })
 
   return (
-    <html lang={locale} className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="antialiased bg-light text-dark">
+    <html lang={locale} className={`${sans.variable} ${mono.variable} ${draft.variable}`}>
+      <body className="antialiased bg-instrument-ground text-instrument-text">
         <NextIntlClientProvider messages={messages}>
           <script
             type="application/ld+json"

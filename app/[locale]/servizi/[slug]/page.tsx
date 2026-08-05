@@ -1,40 +1,54 @@
 import { notFound } from 'next/navigation'
-import { getServiceBySlug, getServices } from '@/lib/sanity/queries'
-import { Heading, Card } from '@/components/ui'
 import Image from 'next/image'
+import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
+import { getServiceBySlug, getServices } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/image'
 import { getLocalizedField, getLocalizedArray } from '@/lib/sanity/locale'
+import { TechnicalSheet, DimensionRule, RevisionNote, PortableText } from '@/components/sheet'
 import type { Locale } from '@/i18n'
 
 export const dynamic = 'force-static'
 
+// Data del cartiglio: costante, così la pagina resta statica e riproducibile.
+const SHEET_DATE = '2026-08'
+
 export async function generateStaticParams() {
-  const services = await getServices()
-  return services.map((service: any) => ({
-    slug: service.slug?.current || '',
-  }))
+  try {
+    const services = await getServices()
+    return (services ?? []).map((service: any) => ({
+      slug: service.slug?.current || '',
+    }))
+  } catch (error) {
+    // Senza CMS raggiungibile si esce con zero pagine invece di rompere il build.
+    console.error('Sanity non raggiungibile in generateStaticParams:', error)
+    return []
+  }
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>
+}) {
   const { slug, locale } = await params
   const service = await getServiceBySlug(slug)
 
   if (!service) {
-    return {
-      title: 'Servizio non trovato',
-    }
+    return { title: 'IN SY TO' }
   }
 
-  const title = getLocalizedField(service.title, locale as Locale)
-  const description = getLocalizedField(service.description, locale as Locale)
-
   return {
-    title: `${title} | IN SY TO`,
-    description: description,
+    title: `${getLocalizedField(service.title, locale as Locale)} | IN SY TO`,
+    description: getLocalizedField(service.description, locale as Locale),
   }
 }
 
-export default async function ServicePage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+export default async function ServicePage({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>
+}) {
   const { slug, locale } = await params
   const service = await getServiceBySlug(slug)
 
@@ -42,141 +56,140 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     notFound()
   }
 
+  const t = await getTranslations({ locale, namespace: 'services' })
+  const tSheet = await getTranslations({ locale, namespace: 'sheet' })
+  const tCta = await getTranslations({ locale, namespace: 'cta' })
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
+
   const title = getLocalizedField(service.title, locale as Locale)
   const description = getLocalizedField(service.description, locale as Locale)
   const content = getLocalizedArray(service.content, locale as Locale)
-  const applications = getLocalizedArray(service.applications, locale as Locale) || []
-
-  const isIt = locale === 'it'
+  const applications = getLocalizedArray(service.applications, locale as Locale) ?? []
+  const banner = service.banner?.[locale]
+  const html = service.htmlContent?.[locale]
 
   return (
-    <div className="section-padding bg-white">
-      <div className="container-custom">
-        {/* Hero Section */}
-        <div className="mb-16">
-          {service.banner && service.banner[locale] ? (
-            <div className="rounded-2xl overflow-hidden mb-6">
-              <Image
-                src={urlFor(service.banner[locale]).width(1200).height(400).url()}
-                alt={service.banner[locale].alt || title}
-                width={1200}
-                height={400}
-                className="w-full h-auto"
-              />
-            </div>
-          ) : (
-            <Heading as="h1" className="mb-6">
-              {title}
-            </Heading>
-          )}
-          {description && (
-            <p className="text-xl text-dark/80 max-w-3xl">
-              {description}
-            </p>
-          )}
+    <TechnicalSheet date={SHEET_DATE} sheetNumber="02">
+      <div className="px-6 py-12 sm:px-10 sm:py-16">
+        <Link
+          href={`/${locale}/servizi`}
+          className="label-sheet hover:text-sheet-ink"
+        >
+          ← {tNav('services')}
+        </Link>
+
+        <div className="mt-8">
+          <DimensionRule />
         </div>
 
-        {/* Image */}
+        {banner ? (
+          <div className="my-4 border border-sheet-hairline">
+            <Image
+              src={urlFor(banner).width(1200).height(400).url()}
+              alt={banner.alt || title}
+              width={1200}
+              height={400}
+              className="h-auto w-full"
+              priority
+            />
+          </div>
+        ) : (
+          <h1 className="title-sheet my-3 max-w-[21ch] text-[clamp(1.4rem,3.4vw,2.4rem)] leading-[1.14]">
+            {title}
+          </h1>
+        )}
+
+        <DimensionRule extent={0.7} dashed />
+
+        {description && (
+          <p className="mt-6 max-w-[58ch] text-[16px] leading-relaxed text-sheet-soft">
+            {description}
+          </p>
+        )}
+
+        <div className="mt-7">
+          <RevisionNote>{t('revisionNote')}</RevisionNote>
+        </div>
+
         {service.image && (
-          <div className="mb-16 rounded-2xl overflow-hidden">
+          <div className="mt-10 border border-sheet-hairline">
             <Image
               src={urlFor(service.image).width(1200).height(600).url()}
-              alt={service.image.alt ? getLocalizedField(service.image.alt, locale as Locale) : title}
+              alt={
+                service.image.alt
+                  ? getLocalizedField(service.image.alt, locale as Locale)
+                  : title
+              }
               width={1200}
               height={600}
-              className="w-full h-auto"
+              className="h-auto w-full"
             />
           </div>
         )}
 
-        {/* Content */}
-        {service.htmlContent && service.htmlContent[locale] ? (
+        {html ? (
           <div
-            className="prose prose-lg max-w-none mb-16 prose-headings:text-dark prose-p:text-dark/80 prose-a:text-primary prose-strong:text-dark prose-ul:text-dark/80 prose-li:text-dark/80"
-            dangerouslySetInnerHTML={{ __html: service.htmlContent[locale] }}
+            className="prose prose-sheet mt-8 max-w-[68ch] text-[15px] leading-relaxed text-sheet-soft prose-headings:title-sheet prose-a:text-primary prose-strong:text-sheet-ink"
+            dangerouslySetInnerHTML={{ __html: html }}
           />
-        ) : content && content.length > 0 && (
-          <div className="prose prose-lg max-w-none mb-16">
-            {/* Render Sanity portable text */}
-            <div className="text-dark/80 space-y-4">
-              {content.map((block: any, index: number) => {
-                if (block._type === 'block') {
-                  return (
-                    <p key={index} className="text-lg leading-relaxed">
-                      {block.children?.map((child: any, childIndex: number) => child.text).join('')}
-                    </p>
-                  )
-                }
-                return null
-              })}
-            </div>
+        ) : (
+          <div className="mt-8">
+            <PortableText value={content as any[]} />
           </div>
         )}
-
-        {/* Applications */}
-        {applications.length > 0 && (
-          <Card className="mb-16">
-            <h2 className="text-2xl font-bold mb-6">{isIt ? 'Applicazioni' : 'Applications'}</h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {applications.map((app: string, index: number) => (
-                <li key={index} className="flex items-start space-x-3">
-                  <span className="text-primary mt-1">•</span>
-                  <span className="text-dark/80">{app}</span>
-                </li>
-              ))}
-            </ul>
-          </Card>
-        )}
-
-        {/* Gallery Mosaic */}
-        {service.gallery && service.gallery.length > 0 && (
-          <div className="mb-16">
-            <h2 className="text-2xl font-bold mb-6">{isIt ? 'Galleria' : 'Gallery'}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {service.gallery.map((item: any, index: number) => {
-                // In Sanity la galleria è un array di oggetti con campo 'image'
-                const imageObj = item.image || item
-                const imageUrl = urlFor(imageObj).width(400).height(400).url()
-                const altText = imageObj?.alt ? getLocalizedField(imageObj.alt, locale as Locale) : `${isIt ? 'Immagine' : 'Image'} ${index + 1}`
-
-                return (
-                  <div
-                    key={index}
-                    className="relative aspect-square overflow-hidden rounded-lg group"
-                  >
-                    <Image
-                      src={imageUrl}
-                      alt={altText}
-                      width={400}
-                      height={400}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* CTA */}
-        <div className="text-center">
-          <Card variant="glass" className="bg-gradient-to-br from-primary/10 to-accent/10">
-            <h3 className="text-2xl font-bold mb-4">
-              {isIt ? 'Interessato a questo servizio?' : 'Interested in this service?'}
-            </h3>
-            <p className="text-dark/80 mb-6">
-              {isIt ? 'Contattaci per maggiori informazioni' : 'Contact us for more information'}
-            </p>
-            <a
-              href={`/${locale}/contatti`}
-              className="inline-block px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
-            >
-              {isIt ? 'Contattaci' : 'Contact Us'}
-            </a>
-          </Card>
-        </div>
       </div>
-    </div>
+
+      {applications.length > 0 && (
+        <div className="border-t border-sheet-hair px-6 py-10 sm:px-10">
+          <h2 className="label-sheet">{tSheet('deliverables')}</h2>
+          <ul className="mt-5 grid gap-x-10 gap-y-3 sm:grid-cols-2">
+            {applications.map((application: string, index: number) => (
+              <li key={index} className="flex gap-3 text-[14px] leading-relaxed text-sheet-soft">
+                <span className="label-sheet tabular pt-[3px]">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                {application}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {service.gallery?.length > 0 && (
+        <ul className="grid grid-cols-2 gap-px border-t border-sheet-hair bg-sheet-hairline sm:grid-cols-3 lg:grid-cols-4">
+          {service.gallery.map((item: any, index: number) => {
+            const image = item.image || item
+            const alt = image?.alt
+              ? getLocalizedField(image.alt, locale as Locale)
+              : `${title} — ${index + 1}`
+
+            return (
+              <li key={index} className="relative aspect-square bg-sheet-surface">
+                <Image
+                  src={urlFor(image).width(600).height(600).url()}
+                  alt={alt}
+                  width={600}
+                  height={600}
+                  className="h-full w-full object-cover"
+                />
+              </li>
+            )
+          })}
+        </ul>
+      )}
+
+      <div className="border-t border-sheet-hair px-6 py-10 sm:px-10">
+        <h2 className="title-sheet max-w-[24ch] text-[15px]">{tCta('title')}</h2>
+        <p className="mt-3 max-w-[58ch] text-[14.5px] leading-relaxed text-sheet-soft">
+          {tCta('body')}
+        </p>
+        <Link
+          href={`/${locale}/contatti`}
+          className="mt-6 inline-block border border-sheet-ink px-5 py-3 font-draft text-[11px] uppercase tracking-[0.14em] text-sheet-ink transition-colors hover:bg-sheet-ink hover:text-sheet-surface"
+        >
+          {tCta('action')}
+        </Link>
+      </div>
+    </TechnicalSheet>
   )
 }
-

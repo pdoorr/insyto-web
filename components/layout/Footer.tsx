@@ -1,8 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
-import { Mail, MapPin } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import type { Locale } from '@/i18n'
 
@@ -10,138 +8,92 @@ interface FooterProps {
   locale: Locale
 }
 
+/**
+ * Piede in stile pannello.
+ *
+ * Rispetto alla versione precedente sono stati rimossi due link rotti: uno
+ * verso /servizi/radiocomunicazione (lo slug reale è sistemi-radiocomunicazione)
+ * e uno verso /privacy, che non è mai esistito come rotta — le informazioni
+ * stanno in /note-legali.
+ */
 export default function Footer({ locale }: FooterProps) {
   const t = useTranslations('footer')
   const tNav = useTranslations('nav')
-  const currentYear = new Date().getFullYear()
 
   const localePath = (path: string) => `/${locale}${path}`
 
-  const footerLinks = {
-    company: [
-      { name: tNav('about'), href: '/profilo' },
-      { name: tNav('services'), href: '/servizi' },
-      { name: tNav('portfolio'), href: '/portfolio' },
-      { name: tNav('workWithUs'), href: '/lavora-con-noi' },
-    ],
-    services: [
-      { name: 'Macchine', href: '/servizi/macchine' },
-      { name: 'Impianti', href: '/servizi/impianti' },
-      { name: 'Sistemi Elettronici', href: '/servizi/sistemi-elettronici' },
-      { name: 'Radiocomunicazione', href: '/servizi/radiocomunicazione' },
-    ],
-    legal: [
-      { name: 'Note Legali', href: '/note-legali' },
-      { name: 'Privacy Policy', href: '/privacy' },
-    ],
-  }
+  const sitemap = [
+    { name: tNav('services'), href: '/servizi' },
+    { name: tNav('portfolio'), href: '/portfolio' },
+    { name: tNav('about'), href: '/profilo' },
+    { name: tNav('workWithUs'), href: '/lavora-con-noi' },
+    { name: tNav('contact'), href: '/contatti' },
+  ]
 
   return (
-    <footer className="bg-dark text-white">
-      <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div>
-            <Link href={localePath('/')} className="inline-block mb-4">
-              <Image
-                src="/logo.png"
-                alt="IN SY TO - Integration Systems Technology"
-                width={150}
-                height={40}
-                className="brightness-0 invert"
-              />
-            </Link>
-            <p className="text-white/80 mb-4">
-              {t('company')}
-            </p>
-            <p className="text-white/60 text-sm">
-              {locale === 'it'
-                ? 'Progettazione, integrazione, installazione, collaudo e certificazione di sistemi elettronici ed elettromeccanici.'
-                : 'Design, integration, installation, testing and certification of electronic and electromechanical systems.'}
-            </p>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <h4 className="font-semibold mb-4">{locale === 'it' ? 'Azienda' : 'Company'}</h4>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={localePath(link.href)}
-                    className="text-white/80 hover:text-white hover:font-bold hover:scale-105 inline-block transition-all duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="font-semibold mb-4">{tNav('services')}</h4>
-            <ul className="space-y-2">
-              {footerLinks.services.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={localePath(link.href)}
-                    className="text-white/80 hover:text-white hover:font-bold hover:scale-105 inline-block transition-all duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-semibold mb-4">{tNav('contact')}</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                <a
-                  href="mailto:info@insyto.it"
-                  className="text-white/80 hover:text-white hover:font-bold hover:scale-105 inline-block transition-all duration-300"
-                >
-                  info@insyto.it
-                </a>
-              </li>
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                <div className="text-white/80 text-sm">
-                  <div>Sede legale: Via Benedetto Croce, 34</div>
-                  <div>00142 – Roma</div>
-                  <div className="mt-2">Sede operativa: Via Carlo Todini, 33</div>
-                  <div>00012 – Guidonia (RM)</div>
-                </div>
-              </li>
-            </ul>
-          </div>
+    <footer className="border-t rule-instrument bg-instrument-panel">
+      <div className="grid gap-10 px-5 py-14 sm:px-8 md:grid-cols-3 lg:px-10">
+        <div>
+          <p className="font-mono text-[13px] uppercase tracking-[0.3em] text-instrument-bright">
+            IN SY TO
+          </p>
+          <p className="mt-4 max-w-[38ch] text-[13.5px] leading-relaxed text-instrument-dim">
+            Integration Systems Technology
+          </p>
+          <a
+            href="mailto:info@insyto.it"
+            className="mt-5 inline-block font-mono text-[12px] text-instrument-signal hover:underline"
+          >
+            info@insyto.it
+          </a>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-white/60 text-sm">
-              © {currentYear} IN SY TO srl - {t('vat')}: 11709001009
-            </p>
-            <div className="flex space-x-6">
-              {footerLinks.legal.map((link) => (
+        <nav aria-label={tNav('home')}>
+          <h2 className="label-instrument">{t('company')}</h2>
+          <ul className="mt-4 space-y-2">
+            {sitemap.map((link) => (
+              <li key={link.href}>
                 <Link
-                  key={link.name}
                   href={localePath(link.href)}
-                  className="text-white/60 hover:text-white hover:font-bold hover:scale-105 text-sm inline-block transition-all duration-300"
+                  className="font-mono text-[12px] uppercase tracking-[0.08em] text-instrument-text transition-colors hover:text-instrument-signal"
                 >
                   {link.name}
                 </Link>
-              ))}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="label-instrument">{t('address')}</h2>
+          <address className="mt-4 space-y-3 text-[13px] not-italic leading-relaxed text-instrument-dim">
+            <span className="block">
+              <span className="label-instrument block">
+                {locale === 'it' ? 'Sede legale' : 'Registered office'}
+              </span>
+              Via Benedetto Croce, 34 — 00142 Roma
+            </span>
+            <span className="block">
+              <span className="label-instrument block">
+                {locale === 'it' ? 'Sede operativa' : 'Operations'}
+              </span>
+              Via Carlo Todini, 33 — 00012 Guidonia (RM)
+            </span>
+          </address>
         </div>
+      </div>
+
+      <div className="flex flex-col gap-3 border-t rule-instrument px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
+        <p className="label-instrument tabular">
+          IN SY TO srl · {t('vat')} 11709001009 · {t('rights')}
+        </p>
+        <Link
+          href={localePath('/note-legali')}
+          className="label-instrument hover:text-instrument-text"
+        >
+          {locale === 'it' ? 'Note legali' : 'Legal notice'}
+        </Link>
       </div>
     </footer>
   )
 }
-
