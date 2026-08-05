@@ -43,3 +43,9 @@ sanity/node_modules
 # temp images
 temp-images/
 
+
+# migrazione WordPress (output generato da lib/migrate-wxr.py)
+sanity-import.ndjson
+media-manifest.json
+download-media.sh
+wp-media/

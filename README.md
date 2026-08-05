@@ -67,16 +67,40 @@ npm run build
 npm start
 ```
 
-## Migrazione Contenuti
+## Migrazione dal vecchio sito WordPress
 
-Per migrare i contenuti dal sito vecchio:
+Il sito precedente girava su WordPress 3.3.1 in hosting condiviso Aruba, con
+permalink "plain" (ogni pagina servita da `/?page_id=N`).
+
+Servono due file, entrambi esportabili dal pannello WordPress e da quello Aruba:
+
+- l'export XML (WXR): `Bacheca → Strumenti → Esporta → Tutti i contenuti`
+- il dump SQL: pannello Aruba → phpMyAdmin → Esporta
 
 ```bash
-# Dalla directory scraper
-python3 lib/migrate-content.py ../scraper/scraped_data sanity-import.json
-
-# Importa in Sanity tramite dashboard
+python3 lib/migrate-wxr.py export.xml --sql dump.sql
 ```
+
+Lo script produce tre file (tutti in .gitignore, si rigenerano):
+
+| File | Contenuto |
+|------|-----------|
+| `sanity-import.ndjson` | documenti Sanity pronti per l'import |
+| `media-manifest.json` | inventario delle immagini del vecchio sito |
+| `download-media.sh` | scarica le immagini via HTTP dal sito ancora online |
+
+```bash
+./download-media.sh wp-media
+npx sanity dataset import sanity-import.ndjson production
+```
+
+Il dump SQL serve per le gallerie **NextGEN Gallery**: quelle immagini non sono
+nella media library e quindi non compaiono nell'export XML. Vanno caricate a
+mano nei campi `gallery` dei documenti, perché l'import di Sanity non carica
+file binari.
+
+I redirect 301 dai vecchi URL sono in `lib/wp-legacy-urls.ts`, applicati da
+`middleware.ts`.
 
 ## Struttura Progetto
 
