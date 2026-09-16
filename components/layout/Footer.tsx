@@ -19,16 +19,11 @@ export default function Footer({ locale }: FooterProps) {
 
   const footerLinks = {
     company: [
-      { name: tNav('about'), href: '/profilo' },
       { name: tNav('services'), href: '/servizi' },
       { name: tNav('portfolio'), href: '/portfolio' },
+      { name: tNav('about'), href: '/profilo' },
       { name: tNav('workWithUs'), href: '/lavora-con-noi' },
-    ],
-    services: [
-      { name: 'Macchine', href: '/servizi/macchine' },
-      { name: 'Impianti', href: '/servizi/impianti' },
-      { name: 'Sistemi Elettronici', href: '/servizi/sistemi-elettronici' },
-      { name: 'Radiocomunicazione', href: '/servizi/radiocomunicazione' },
+      { name: tNav('contact'), href: '/contatti' },
     ],
     legal: [
       { name: 'Note Legali', href: '/note-legali' },
@@ -39,7 +34,7 @@ export default function Footer({ locale }: FooterProps) {
   return (
     <footer className="bg-dark text-white">
       <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
             <Link href={localePath('/')} className="inline-block mb-4">
@@ -66,23 +61,6 @@ export default function Footer({ locale }: FooterProps) {
             <h4 className="font-semibold mb-4">{locale === 'it' ? 'Azienda' : 'Company'}</h4>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={localePath(link.href)}
-                    className="text-white/80 hover:text-white hover:font-bold hover:scale-105 inline-block transition-all duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="font-semibold mb-4">{tNav('services')}</h4>
-            <ul className="space-y-2">
-              {footerLinks.services.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={localePath(link.href)}
@@ -144,4 +122,3 @@ export default function Footer({ locale }: FooterProps) {
     </footer>
   )
 }
-

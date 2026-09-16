@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getServices, getProjects, getBlogPosts, getPages } from '@/lib/sanity/queries'
+import { getServices, getProjects, getPages } from '@/lib/sanity/queries'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.insyto.it'
@@ -31,12 +31,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/lavora-con-noi`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
@@ -58,10 +52,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic routes from Sanity
   try {
-    const [services, projects, blogPosts, pages] = await Promise.all([
+    const [services, projects, pages] = await Promise.all([
       getServices(),
       getProjects(),
-      getBlogPosts(),
       getPages(),
     ])
 
@@ -79,13 +72,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }))
 
-    const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post: any) => ({
-      url: `${baseUrl}/blog/${post.slug?.current || ''}`,
-      lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }))
-
     const pageRoutes: MetadataRoute.Sitemap = pages.map((page: any) => ({
       url: `${baseUrl}/${page.slug?.current || ''}`,
       lastModified: page._updatedAt ? new Date(page._updatedAt) : new Date(),
@@ -93,10 +79,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }))
 
-    return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...blogRoutes, ...pageRoutes]
+    return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...pageRoutes]
   } catch (error) {
     console.error('Error generating sitemap:', error)
     return staticRoutes
   }
 }
-
