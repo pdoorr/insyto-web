@@ -12,6 +12,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'www.insyto.it',
+      },
+      {
+        protocol: 'https',
         hostname: 'cdn.sanity.cloud',
       },
       {
@@ -30,4 +34,3 @@ const nextConfig = {
 }
 
 module.exports = withNextIntl(nextConfig)
-
